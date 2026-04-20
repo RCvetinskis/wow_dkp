@@ -1,0 +1,34 @@
+generator client {
+  provider   = "prisma-client"
+  output     = "./generated"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Faction {
+  ALLIANCE
+  HORDE
+}
+model Guild {
+  id    Int     @id @default(autoincrement())
+  name  String @unique
+  faction Faction
+  characters Character[]
+}
+
+model Character {
+  id       Int      @id @default(autoincrement())
+  name     String   @unique
+  faction  Faction
+
+  isMain   Boolean  @default(true)
+
+  guildId  Int
+  guild    Guild    @relation(fields: [guildId], references: [id])
+
+  mainId   Int?
+  main     Character? @relation("MainAlts", fields: [mainId], references: [id])
+  alts     Character[] @relation("MainAlts")
+}
