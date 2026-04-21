@@ -1,0 +1,25 @@
+import CreateUser from "@/components/forms/create-user";
+import LoginUser from "@/components/forms/login-user";
+
+const AuthPage = () => {
+  return (
+    <div className="tabs tabs-border">
+      <input
+        type="radio"
+        name="my_tabs_2"
+        className="tab"
+        aria-label="Tab 1"
+        defaultChecked
+      />
+      <div className="tab-content border-base-300 bg-base-100 p-10">
+        <LoginUser />
+      </div>
+      <input type="radio" name="my_tabs_2" className="tab" aria-label="Tab 2" />
+      <div className="tab-content border-base-300 bg-base-100 p-10">
+        <CreateUser />
+      </div>
+    </div>
+  );
+};
+
+export default AuthPage;

@@ -52,7 +52,8 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   Guild: 'Guild',
-  Character: 'Character'
+  Character: 'Character',
+  User: 'User'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -74,7 +75,9 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 export const GuildScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  faction: 'faction'
+  faction: 'faction',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type GuildScalarFieldEnum = (typeof GuildScalarFieldEnum)[keyof typeof GuildScalarFieldEnum]
@@ -84,12 +87,30 @@ export const CharacterScalarFieldEnum = {
   id: 'id',
   name: 'name',
   faction: 'faction',
+  class: 'class',
+  spec: 'spec',
+  gearscore: 'gearscore',
   isMain: 'isMain',
   guildId: 'guildId',
-  mainId: 'mainId'
+  userId: 'userId',
+  mainId: 'mainId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type CharacterScalarFieldEnum = (typeof CharacterScalarFieldEnum)[keyof typeof CharacterScalarFieldEnum]
+
+
+export const UserScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  password: 'password',
+  role: 'role',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
 export const SortOrder = {

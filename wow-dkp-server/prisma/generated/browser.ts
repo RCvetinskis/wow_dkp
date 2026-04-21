@@ -27,3 +27,8 @@ export type Guild = Prisma.GuildModel
  * 
  */
 export type Character = Prisma.CharacterModel
+/**
+ * Model User
+ * 
+ */
+export type User = Prisma.UserModel

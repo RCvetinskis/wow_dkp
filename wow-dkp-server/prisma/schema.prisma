@@ -11,24 +11,124 @@ enum Faction {
   ALLIANCE
   HORDE
 }
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum Expansion {
+WRATH_OF_THE_LICH_KING
+}
+enum Class {
+  WARRIOR
+  PALADIN
+  HUNTER
+  ROGUE
+  PRIEST
+  DEATH_KNIGHT
+  SHAMAN
+  MAGE
+  WARLOCK
+  DRUID
+}
+
+enum Specialization {
+  // WARRIOR
+  ARMS
+  FURY
+  PROTECTION_WARRIOR
+
+  // PALADIN
+  HOLY_PALADIN
+  PROTECTION_PALADIN
+  RETRIBUTION
+
+  // HUNTER
+  BEAST_MASTERY
+  MARKSMANSHIP
+  SURVIVAL
+
+  // ROGUE
+  ASSASSINATION
+  COMBAT
+  SUBTLETY
+
+  // PRIEST
+  DISCIPLINE
+  HOLY_PRIEST
+  SHADOW
+
+  // DEATH KNIGHT
+  BLOOD
+  FROST_DK
+  UNHOLY
+
+  // SHAMAN
+  ELEMENTAL
+  ENHANCEMENT
+  RESTORATION_SHAMAN
+
+  // MAGE
+  ARCANE
+  FIRE
+  FROST_MAGE
+
+  // WARLOCK
+  AFFLICTION
+  DEMONOLOGY
+  DESTRUCTION
+
+  // DRUID
+  BALANCE
+  FERAL_DPS
+  FERAL_TANK
+  RESTORATION_DRUID
+}
+
 model Guild {
   id    Int     @id @default(autoincrement())
   name  String @unique
   faction Faction
   characters Character[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Character {
   id       Int      @id @default(autoincrement())
   name     String   @unique
   faction  Faction
+  class Class
+  spec  Specialization
+  gearscore Int @default(0)
 
   isMain   Boolean  @default(true)
 
   guildId  Int
   guild    Guild    @relation(fields: [guildId], references: [id])
 
+  userId Int?
+  user   User? @relation(fields: [userId], references: [id])
+
   mainId   Int?
   main     Character? @relation("MainAlts", fields: [mainId], references: [id])
   alts     Character[] @relation("MainAlts")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model User{
+  id Int @id @default(autoincrement())
+
+  name String @unique
+  password String
+
+  role      Role     @default(USER)
+
+  characters Character[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

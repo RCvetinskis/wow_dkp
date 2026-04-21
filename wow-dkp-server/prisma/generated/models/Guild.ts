@@ -38,18 +38,24 @@ export type GuildMinAggregateOutputType = {
   id: number | null
   name: string | null
   faction: $Enums.Faction | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type GuildMaxAggregateOutputType = {
   id: number | null
   name: string | null
   faction: $Enums.Faction | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type GuildCountAggregateOutputType = {
   id: number
   name: number
   faction: number
+  createdAt: number
+  updatedAt: number
   _all: number
 }
 
@@ -66,18 +72,24 @@ export type GuildMinAggregateInputType = {
   id?: true
   name?: true
   faction?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type GuildMaxAggregateInputType = {
   id?: true
   name?: true
   faction?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type GuildCountAggregateInputType = {
   id?: true
   name?: true
   faction?: true
+  createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -171,6 +183,8 @@ export type GuildGroupByOutputType = {
   id: number
   name: string
   faction: $Enums.Faction
+  createdAt: Date
+  updatedAt: Date
   _count: GuildCountAggregateOutputType | null
   _avg: GuildAvgAggregateOutputType | null
   _sum: GuildSumAggregateOutputType | null
@@ -200,6 +214,8 @@ export type GuildWhereInput = {
   id?: Prisma.IntFilter<"Guild"> | number
   name?: Prisma.StringFilter<"Guild"> | string
   faction?: Prisma.EnumFactionFilter<"Guild"> | $Enums.Faction
+  createdAt?: Prisma.DateTimeFilter<"Guild"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Guild"> | Date | string
   characters?: Prisma.CharacterListRelationFilter
 }
 
@@ -207,6 +223,8 @@ export type GuildOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   faction?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   characters?: Prisma.CharacterOrderByRelationAggregateInput
 }
 
@@ -217,6 +235,8 @@ export type GuildWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.GuildWhereInput[]
   NOT?: Prisma.GuildWhereInput | Prisma.GuildWhereInput[]
   faction?: Prisma.EnumFactionFilter<"Guild"> | $Enums.Faction
+  createdAt?: Prisma.DateTimeFilter<"Guild"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Guild"> | Date | string
   characters?: Prisma.CharacterListRelationFilter
 }, "id" | "name">
 
@@ -224,6 +244,8 @@ export type GuildOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   faction?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.GuildCountOrderByAggregateInput
   _avg?: Prisma.GuildAvgOrderByAggregateInput
   _max?: Prisma.GuildMaxOrderByAggregateInput
@@ -238,11 +260,15 @@ export type GuildScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"Guild"> | number
   name?: Prisma.StringWithAggregatesFilter<"Guild"> | string
   faction?: Prisma.EnumFactionWithAggregatesFilter<"Guild"> | $Enums.Faction
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Guild"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Guild"> | Date | string
 }
 
 export type GuildCreateInput = {
   name: string
   faction: $Enums.Faction
+  createdAt?: Date | string
+  updatedAt?: Date | string
   characters?: Prisma.CharacterCreateNestedManyWithoutGuildInput
 }
 
@@ -250,12 +276,16 @@ export type GuildUncheckedCreateInput = {
   id?: number
   name: string
   faction: $Enums.Faction
+  createdAt?: Date | string
+  updatedAt?: Date | string
   characters?: Prisma.CharacterUncheckedCreateNestedManyWithoutGuildInput
 }
 
 export type GuildUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   faction?: Prisma.EnumFactionFieldUpdateOperationsInput | $Enums.Faction
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   characters?: Prisma.CharacterUpdateManyWithoutGuildNestedInput
 }
 
@@ -263,6 +293,8 @@ export type GuildUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   faction?: Prisma.EnumFactionFieldUpdateOperationsInput | $Enums.Faction
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   characters?: Prisma.CharacterUncheckedUpdateManyWithoutGuildNestedInput
 }
 
@@ -270,23 +302,31 @@ export type GuildCreateManyInput = {
   id?: number
   name: string
   faction: $Enums.Faction
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type GuildUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   faction?: Prisma.EnumFactionFieldUpdateOperationsInput | $Enums.Faction
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type GuildUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   faction?: Prisma.EnumFactionFieldUpdateOperationsInput | $Enums.Faction
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type GuildCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   faction?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type GuildAvgOrderByAggregateInput = {
@@ -297,12 +337,16 @@ export type GuildMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   faction?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type GuildMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   faction?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type GuildSumOrderByAggregateInput = {
@@ -320,6 +364,10 @@ export type StringFieldUpdateOperationsInput = {
 
 export type EnumFactionFieldUpdateOperationsInput = {
   set?: $Enums.Faction
+}
+
+export type DateTimeFieldUpdateOperationsInput = {
+  set?: Date | string
 }
 
 export type IntFieldUpdateOperationsInput = {
@@ -347,12 +395,16 @@ export type GuildUpdateOneRequiredWithoutCharactersNestedInput = {
 export type GuildCreateWithoutCharactersInput = {
   name: string
   faction: $Enums.Faction
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type GuildUncheckedCreateWithoutCharactersInput = {
   id?: number
   name: string
   faction: $Enums.Faction
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type GuildCreateOrConnectWithoutCharactersInput = {
@@ -374,12 +426,16 @@ export type GuildUpdateToOneWithWhereWithoutCharactersInput = {
 export type GuildUpdateWithoutCharactersInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   faction?: Prisma.EnumFactionFieldUpdateOperationsInput | $Enums.Faction
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type GuildUncheckedUpdateWithoutCharactersInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   faction?: Prisma.EnumFactionFieldUpdateOperationsInput | $Enums.Faction
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -417,6 +473,8 @@ export type GuildSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   id?: boolean
   name?: boolean
   faction?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   characters?: boolean | Prisma.Guild$charactersArgs<ExtArgs>
   _count?: boolean | Prisma.GuildCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["guild"]>
@@ -425,21 +483,27 @@ export type GuildSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   id?: boolean
   name?: boolean
   faction?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }, ExtArgs["result"]["guild"]>
 
 export type GuildSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
   faction?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }, ExtArgs["result"]["guild"]>
 
 export type GuildSelectScalar = {
   id?: boolean
   name?: boolean
   faction?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type GuildOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "faction", ExtArgs["result"]["guild"]>
+export type GuildOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "faction" | "createdAt" | "updatedAt", ExtArgs["result"]["guild"]>
 export type GuildInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   characters?: boolean | Prisma.Guild$charactersArgs<ExtArgs>
   _count?: boolean | Prisma.GuildCountOutputTypeDefaultArgs<ExtArgs>
@@ -456,6 +520,8 @@ export type $GuildPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     id: number
     name: string
     faction: $Enums.Faction
+    createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["guild"]>
   composites: {}
 }
@@ -883,6 +949,8 @@ export interface GuildFieldRefs {
   readonly id: Prisma.FieldRef<"Guild", 'Int'>
   readonly name: Prisma.FieldRef<"Guild", 'String'>
   readonly faction: Prisma.FieldRef<"Guild", 'Faction'>
+  readonly createdAt: Prisma.FieldRef<"Guild", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"Guild", 'DateTime'>
 }
     
 

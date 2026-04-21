@@ -28,13 +28,17 @@ export type AggregateCharacter = {
 
 export type CharacterAvgAggregateOutputType = {
   id: number | null
+  gearscore: number | null
   guildId: number | null
+  userId: number | null
   mainId: number | null
 }
 
 export type CharacterSumAggregateOutputType = {
   id: number | null
+  gearscore: number | null
   guildId: number | null
+  userId: number | null
   mainId: number | null
 }
 
@@ -42,40 +46,62 @@ export type CharacterMinAggregateOutputType = {
   id: number | null
   name: string | null
   faction: $Enums.Faction | null
+  class: $Enums.Class | null
+  spec: $Enums.Specialization | null
+  gearscore: number | null
   isMain: boolean | null
   guildId: number | null
+  userId: number | null
   mainId: number | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type CharacterMaxAggregateOutputType = {
   id: number | null
   name: string | null
   faction: $Enums.Faction | null
+  class: $Enums.Class | null
+  spec: $Enums.Specialization | null
+  gearscore: number | null
   isMain: boolean | null
   guildId: number | null
+  userId: number | null
   mainId: number | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type CharacterCountAggregateOutputType = {
   id: number
   name: number
   faction: number
+  class: number
+  spec: number
+  gearscore: number
   isMain: number
   guildId: number
+  userId: number
   mainId: number
+  createdAt: number
+  updatedAt: number
   _all: number
 }
 
 
 export type CharacterAvgAggregateInputType = {
   id?: true
+  gearscore?: true
   guildId?: true
+  userId?: true
   mainId?: true
 }
 
 export type CharacterSumAggregateInputType = {
   id?: true
+  gearscore?: true
   guildId?: true
+  userId?: true
   mainId?: true
 }
 
@@ -83,27 +109,45 @@ export type CharacterMinAggregateInputType = {
   id?: true
   name?: true
   faction?: true
+  class?: true
+  spec?: true
+  gearscore?: true
   isMain?: true
   guildId?: true
+  userId?: true
   mainId?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type CharacterMaxAggregateInputType = {
   id?: true
   name?: true
   faction?: true
+  class?: true
+  spec?: true
+  gearscore?: true
   isMain?: true
   guildId?: true
+  userId?: true
   mainId?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type CharacterCountAggregateInputType = {
   id?: true
   name?: true
   faction?: true
+  class?: true
+  spec?: true
+  gearscore?: true
   isMain?: true
   guildId?: true
+  userId?: true
   mainId?: true
+  createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -197,9 +241,15 @@ export type CharacterGroupByOutputType = {
   id: number
   name: string
   faction: $Enums.Faction
+  class: $Enums.Class
+  spec: $Enums.Specialization
+  gearscore: number
   isMain: boolean
   guildId: number
+  userId: number | null
   mainId: number | null
+  createdAt: Date
+  updatedAt: Date
   _count: CharacterCountAggregateOutputType | null
   _avg: CharacterAvgAggregateOutputType | null
   _sum: CharacterSumAggregateOutputType | null
@@ -229,10 +279,17 @@ export type CharacterWhereInput = {
   id?: Prisma.IntFilter<"Character"> | number
   name?: Prisma.StringFilter<"Character"> | string
   faction?: Prisma.EnumFactionFilter<"Character"> | $Enums.Faction
+  class?: Prisma.EnumClassFilter<"Character"> | $Enums.Class
+  spec?: Prisma.EnumSpecializationFilter<"Character"> | $Enums.Specialization
+  gearscore?: Prisma.IntFilter<"Character"> | number
   isMain?: Prisma.BoolFilter<"Character"> | boolean
   guildId?: Prisma.IntFilter<"Character"> | number
+  userId?: Prisma.IntNullableFilter<"Character"> | number | null
   mainId?: Prisma.IntNullableFilter<"Character"> | number | null
+  createdAt?: Prisma.DateTimeFilter<"Character"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Character"> | Date | string
   guild?: Prisma.XOR<Prisma.GuildScalarRelationFilter, Prisma.GuildWhereInput>
+  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   main?: Prisma.XOR<Prisma.CharacterNullableScalarRelationFilter, Prisma.CharacterWhereInput> | null
   alts?: Prisma.CharacterListRelationFilter
 }
@@ -241,10 +298,17 @@ export type CharacterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   faction?: Prisma.SortOrder
+  class?: Prisma.SortOrder
+  spec?: Prisma.SortOrder
+  gearscore?: Prisma.SortOrder
   isMain?: Prisma.SortOrder
   guildId?: Prisma.SortOrder
+  userId?: Prisma.SortOrderInput | Prisma.SortOrder
   mainId?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   guild?: Prisma.GuildOrderByWithRelationInput
+  user?: Prisma.UserOrderByWithRelationInput
   main?: Prisma.CharacterOrderByWithRelationInput
   alts?: Prisma.CharacterOrderByRelationAggregateInput
 }
@@ -256,10 +320,17 @@ export type CharacterWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.CharacterWhereInput[]
   NOT?: Prisma.CharacterWhereInput | Prisma.CharacterWhereInput[]
   faction?: Prisma.EnumFactionFilter<"Character"> | $Enums.Faction
+  class?: Prisma.EnumClassFilter<"Character"> | $Enums.Class
+  spec?: Prisma.EnumSpecializationFilter<"Character"> | $Enums.Specialization
+  gearscore?: Prisma.IntFilter<"Character"> | number
   isMain?: Prisma.BoolFilter<"Character"> | boolean
   guildId?: Prisma.IntFilter<"Character"> | number
+  userId?: Prisma.IntNullableFilter<"Character"> | number | null
   mainId?: Prisma.IntNullableFilter<"Character"> | number | null
+  createdAt?: Prisma.DateTimeFilter<"Character"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Character"> | Date | string
   guild?: Prisma.XOR<Prisma.GuildScalarRelationFilter, Prisma.GuildWhereInput>
+  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   main?: Prisma.XOR<Prisma.CharacterNullableScalarRelationFilter, Prisma.CharacterWhereInput> | null
   alts?: Prisma.CharacterListRelationFilter
 }, "id" | "name">
@@ -268,9 +339,15 @@ export type CharacterOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   faction?: Prisma.SortOrder
+  class?: Prisma.SortOrder
+  spec?: Prisma.SortOrder
+  gearscore?: Prisma.SortOrder
   isMain?: Prisma.SortOrder
   guildId?: Prisma.SortOrder
+  userId?: Prisma.SortOrderInput | Prisma.SortOrder
   mainId?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.CharacterCountOrderByAggregateInput
   _avg?: Prisma.CharacterAvgOrderByAggregateInput
   _max?: Prisma.CharacterMaxOrderByAggregateInput
@@ -285,16 +362,28 @@ export type CharacterScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"Character"> | number
   name?: Prisma.StringWithAggregatesFilter<"Character"> | string
   faction?: Prisma.EnumFactionWithAggregatesFilter<"Character"> | $Enums.Faction
+  class?: Prisma.EnumClassWithAggregatesFilter<"Character"> | $Enums.Class
+  spec?: Prisma.EnumSpecializationWithAggregatesFilter<"Character"> | $Enums.Specialization
+  gearscore?: Prisma.IntWithAggregatesFilter<"Character"> | number
   isMain?: Prisma.BoolWithAggregatesFilter<"Character"> | boolean
   guildId?: Prisma.IntWithAggregatesFilter<"Character"> | number
+  userId?: Prisma.IntNullableWithAggregatesFilter<"Character"> | number | null
   mainId?: Prisma.IntNullableWithAggregatesFilter<"Character"> | number | null
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Character"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Character"> | Date | string
 }
 
 export type CharacterCreateInput = {
   name: string
   faction: $Enums.Faction
+  class: $Enums.Class
+  spec: $Enums.Specialization
+  gearscore?: number
   isMain?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   guild: Prisma.GuildCreateNestedOneWithoutCharactersInput
+  user?: Prisma.UserCreateNestedOneWithoutCharactersInput
   main?: Prisma.CharacterCreateNestedOneWithoutAltsInput
   alts?: Prisma.CharacterCreateNestedManyWithoutMainInput
 }
@@ -303,17 +392,29 @@ export type CharacterUncheckedCreateInput = {
   id?: number
   name: string
   faction: $Enums.Faction
+  class: $Enums.Class
+  spec: $Enums.Specialization
+  gearscore?: number
   isMain?: boolean
   guildId: number
+  userId?: number | null
   mainId?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   alts?: Prisma.CharacterUncheckedCreateNestedManyWithoutMainInput
 }
 
 export type CharacterUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   faction?: Prisma.EnumFactionFieldUpdateOperationsInput | $Enums.Faction
+  class?: Prisma.EnumClassFieldUpdateOperationsInput | $Enums.Class
+  spec?: Prisma.EnumSpecializationFieldUpdateOperationsInput | $Enums.Specialization
+  gearscore?: Prisma.IntFieldUpdateOperationsInput | number
   isMain?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   guild?: Prisma.GuildUpdateOneRequiredWithoutCharactersNestedInput
+  user?: Prisma.UserUpdateOneWithoutCharactersNestedInput
   main?: Prisma.CharacterUpdateOneWithoutAltsNestedInput
   alts?: Prisma.CharacterUpdateManyWithoutMainNestedInput
 }
@@ -322,9 +423,15 @@ export type CharacterUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   faction?: Prisma.EnumFactionFieldUpdateOperationsInput | $Enums.Faction
+  class?: Prisma.EnumClassFieldUpdateOperationsInput | $Enums.Class
+  spec?: Prisma.EnumSpecializationFieldUpdateOperationsInput | $Enums.Specialization
+  gearscore?: Prisma.IntFieldUpdateOperationsInput | number
   isMain?: Prisma.BoolFieldUpdateOperationsInput | boolean
   guildId?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   mainId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   alts?: Prisma.CharacterUncheckedUpdateManyWithoutMainNestedInput
 }
 
@@ -332,24 +439,41 @@ export type CharacterCreateManyInput = {
   id?: number
   name: string
   faction: $Enums.Faction
+  class: $Enums.Class
+  spec: $Enums.Specialization
+  gearscore?: number
   isMain?: boolean
   guildId: number
+  userId?: number | null
   mainId?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type CharacterUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   faction?: Prisma.EnumFactionFieldUpdateOperationsInput | $Enums.Faction
+  class?: Prisma.EnumClassFieldUpdateOperationsInput | $Enums.Class
+  spec?: Prisma.EnumSpecializationFieldUpdateOperationsInput | $Enums.Specialization
+  gearscore?: Prisma.IntFieldUpdateOperationsInput | number
   isMain?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type CharacterUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   faction?: Prisma.EnumFactionFieldUpdateOperationsInput | $Enums.Faction
+  class?: Prisma.EnumClassFieldUpdateOperationsInput | $Enums.Class
+  spec?: Prisma.EnumSpecializationFieldUpdateOperationsInput | $Enums.Specialization
+  gearscore?: Prisma.IntFieldUpdateOperationsInput | number
   isMain?: Prisma.BoolFieldUpdateOperationsInput | boolean
   guildId?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   mainId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type CharacterListRelationFilter = {
@@ -371,14 +495,22 @@ export type CharacterCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   faction?: Prisma.SortOrder
+  class?: Prisma.SortOrder
+  spec?: Prisma.SortOrder
+  gearscore?: Prisma.SortOrder
   isMain?: Prisma.SortOrder
   guildId?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
   mainId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type CharacterAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  gearscore?: Prisma.SortOrder
   guildId?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
   mainId?: Prisma.SortOrder
 }
 
@@ -386,23 +518,37 @@ export type CharacterMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   faction?: Prisma.SortOrder
+  class?: Prisma.SortOrder
+  spec?: Prisma.SortOrder
+  gearscore?: Prisma.SortOrder
   isMain?: Prisma.SortOrder
   guildId?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
   mainId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type CharacterMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   faction?: Prisma.SortOrder
+  class?: Prisma.SortOrder
+  spec?: Prisma.SortOrder
+  gearscore?: Prisma.SortOrder
   isMain?: Prisma.SortOrder
   guildId?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
   mainId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type CharacterSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  gearscore?: Prisma.SortOrder
   guildId?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
   mainId?: Prisma.SortOrder
 }
 
@@ -468,6 +614,14 @@ export type CharacterUncheckedCreateNestedManyWithoutMainInput = {
   connect?: Prisma.CharacterWhereUniqueInput | Prisma.CharacterWhereUniqueInput[]
 }
 
+export type EnumClassFieldUpdateOperationsInput = {
+  set?: $Enums.Class
+}
+
+export type EnumSpecializationFieldUpdateOperationsInput = {
+  set?: $Enums.Specialization
+}
+
 export type BoolFieldUpdateOperationsInput = {
   set?: boolean
 }
@@ -518,10 +672,58 @@ export type CharacterUncheckedUpdateManyWithoutMainNestedInput = {
   deleteMany?: Prisma.CharacterScalarWhereInput | Prisma.CharacterScalarWhereInput[]
 }
 
+export type CharacterCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.CharacterCreateWithoutUserInput, Prisma.CharacterUncheckedCreateWithoutUserInput> | Prisma.CharacterCreateWithoutUserInput[] | Prisma.CharacterUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.CharacterCreateOrConnectWithoutUserInput | Prisma.CharacterCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.CharacterCreateManyUserInputEnvelope
+  connect?: Prisma.CharacterWhereUniqueInput | Prisma.CharacterWhereUniqueInput[]
+}
+
+export type CharacterUncheckedCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.CharacterCreateWithoutUserInput, Prisma.CharacterUncheckedCreateWithoutUserInput> | Prisma.CharacterCreateWithoutUserInput[] | Prisma.CharacterUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.CharacterCreateOrConnectWithoutUserInput | Prisma.CharacterCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.CharacterCreateManyUserInputEnvelope
+  connect?: Prisma.CharacterWhereUniqueInput | Prisma.CharacterWhereUniqueInput[]
+}
+
+export type CharacterUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.CharacterCreateWithoutUserInput, Prisma.CharacterUncheckedCreateWithoutUserInput> | Prisma.CharacterCreateWithoutUserInput[] | Prisma.CharacterUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.CharacterCreateOrConnectWithoutUserInput | Prisma.CharacterCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.CharacterUpsertWithWhereUniqueWithoutUserInput | Prisma.CharacterUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.CharacterCreateManyUserInputEnvelope
+  set?: Prisma.CharacterWhereUniqueInput | Prisma.CharacterWhereUniqueInput[]
+  disconnect?: Prisma.CharacterWhereUniqueInput | Prisma.CharacterWhereUniqueInput[]
+  delete?: Prisma.CharacterWhereUniqueInput | Prisma.CharacterWhereUniqueInput[]
+  connect?: Prisma.CharacterWhereUniqueInput | Prisma.CharacterWhereUniqueInput[]
+  update?: Prisma.CharacterUpdateWithWhereUniqueWithoutUserInput | Prisma.CharacterUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.CharacterUpdateManyWithWhereWithoutUserInput | Prisma.CharacterUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.CharacterScalarWhereInput | Prisma.CharacterScalarWhereInput[]
+}
+
+export type CharacterUncheckedUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.CharacterCreateWithoutUserInput, Prisma.CharacterUncheckedCreateWithoutUserInput> | Prisma.CharacterCreateWithoutUserInput[] | Prisma.CharacterUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.CharacterCreateOrConnectWithoutUserInput | Prisma.CharacterCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.CharacterUpsertWithWhereUniqueWithoutUserInput | Prisma.CharacterUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.CharacterCreateManyUserInputEnvelope
+  set?: Prisma.CharacterWhereUniqueInput | Prisma.CharacterWhereUniqueInput[]
+  disconnect?: Prisma.CharacterWhereUniqueInput | Prisma.CharacterWhereUniqueInput[]
+  delete?: Prisma.CharacterWhereUniqueInput | Prisma.CharacterWhereUniqueInput[]
+  connect?: Prisma.CharacterWhereUniqueInput | Prisma.CharacterWhereUniqueInput[]
+  update?: Prisma.CharacterUpdateWithWhereUniqueWithoutUserInput | Prisma.CharacterUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.CharacterUpdateManyWithWhereWithoutUserInput | Prisma.CharacterUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.CharacterScalarWhereInput | Prisma.CharacterScalarWhereInput[]
+}
+
 export type CharacterCreateWithoutGuildInput = {
   name: string
   faction: $Enums.Faction
+  class: $Enums.Class
+  spec: $Enums.Specialization
+  gearscore?: number
   isMain?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user?: Prisma.UserCreateNestedOneWithoutCharactersInput
   main?: Prisma.CharacterCreateNestedOneWithoutAltsInput
   alts?: Prisma.CharacterCreateNestedManyWithoutMainInput
 }
@@ -530,8 +732,14 @@ export type CharacterUncheckedCreateWithoutGuildInput = {
   id?: number
   name: string
   faction: $Enums.Faction
+  class: $Enums.Class
+  spec: $Enums.Specialization
+  gearscore?: number
   isMain?: boolean
+  userId?: number | null
   mainId?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   alts?: Prisma.CharacterUncheckedCreateNestedManyWithoutMainInput
 }
 
@@ -568,16 +776,28 @@ export type CharacterScalarWhereInput = {
   id?: Prisma.IntFilter<"Character"> | number
   name?: Prisma.StringFilter<"Character"> | string
   faction?: Prisma.EnumFactionFilter<"Character"> | $Enums.Faction
+  class?: Prisma.EnumClassFilter<"Character"> | $Enums.Class
+  spec?: Prisma.EnumSpecializationFilter<"Character"> | $Enums.Specialization
+  gearscore?: Prisma.IntFilter<"Character"> | number
   isMain?: Prisma.BoolFilter<"Character"> | boolean
   guildId?: Prisma.IntFilter<"Character"> | number
+  userId?: Prisma.IntNullableFilter<"Character"> | number | null
   mainId?: Prisma.IntNullableFilter<"Character"> | number | null
+  createdAt?: Prisma.DateTimeFilter<"Character"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Character"> | Date | string
 }
 
 export type CharacterCreateWithoutAltsInput = {
   name: string
   faction: $Enums.Faction
+  class: $Enums.Class
+  spec: $Enums.Specialization
+  gearscore?: number
   isMain?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   guild: Prisma.GuildCreateNestedOneWithoutCharactersInput
+  user?: Prisma.UserCreateNestedOneWithoutCharactersInput
   main?: Prisma.CharacterCreateNestedOneWithoutAltsInput
 }
 
@@ -585,9 +805,15 @@ export type CharacterUncheckedCreateWithoutAltsInput = {
   id?: number
   name: string
   faction: $Enums.Faction
+  class: $Enums.Class
+  spec: $Enums.Specialization
+  gearscore?: number
   isMain?: boolean
   guildId: number
+  userId?: number | null
   mainId?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type CharacterCreateOrConnectWithoutAltsInput = {
@@ -598,8 +824,14 @@ export type CharacterCreateOrConnectWithoutAltsInput = {
 export type CharacterCreateWithoutMainInput = {
   name: string
   faction: $Enums.Faction
+  class: $Enums.Class
+  spec: $Enums.Specialization
+  gearscore?: number
   isMain?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   guild: Prisma.GuildCreateNestedOneWithoutCharactersInput
+  user?: Prisma.UserCreateNestedOneWithoutCharactersInput
   alts?: Prisma.CharacterCreateNestedManyWithoutMainInput
 }
 
@@ -607,8 +839,14 @@ export type CharacterUncheckedCreateWithoutMainInput = {
   id?: number
   name: string
   faction: $Enums.Faction
+  class: $Enums.Class
+  spec: $Enums.Specialization
+  gearscore?: number
   isMain?: boolean
   guildId: number
+  userId?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   alts?: Prisma.CharacterUncheckedCreateNestedManyWithoutMainInput
 }
 
@@ -636,8 +874,14 @@ export type CharacterUpdateToOneWithWhereWithoutAltsInput = {
 export type CharacterUpdateWithoutAltsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   faction?: Prisma.EnumFactionFieldUpdateOperationsInput | $Enums.Faction
+  class?: Prisma.EnumClassFieldUpdateOperationsInput | $Enums.Class
+  spec?: Prisma.EnumSpecializationFieldUpdateOperationsInput | $Enums.Specialization
+  gearscore?: Prisma.IntFieldUpdateOperationsInput | number
   isMain?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   guild?: Prisma.GuildUpdateOneRequiredWithoutCharactersNestedInput
+  user?: Prisma.UserUpdateOneWithoutCharactersNestedInput
   main?: Prisma.CharacterUpdateOneWithoutAltsNestedInput
 }
 
@@ -645,9 +889,15 @@ export type CharacterUncheckedUpdateWithoutAltsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   faction?: Prisma.EnumFactionFieldUpdateOperationsInput | $Enums.Faction
+  class?: Prisma.EnumClassFieldUpdateOperationsInput | $Enums.Class
+  spec?: Prisma.EnumSpecializationFieldUpdateOperationsInput | $Enums.Specialization
+  gearscore?: Prisma.IntFieldUpdateOperationsInput | number
   isMain?: Prisma.BoolFieldUpdateOperationsInput | boolean
   guildId?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   mainId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type CharacterUpsertWithWhereUniqueWithoutMainInput = {
@@ -666,18 +916,85 @@ export type CharacterUpdateManyWithWhereWithoutMainInput = {
   data: Prisma.XOR<Prisma.CharacterUpdateManyMutationInput, Prisma.CharacterUncheckedUpdateManyWithoutMainInput>
 }
 
+export type CharacterCreateWithoutUserInput = {
+  name: string
+  faction: $Enums.Faction
+  class: $Enums.Class
+  spec: $Enums.Specialization
+  gearscore?: number
+  isMain?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  guild: Prisma.GuildCreateNestedOneWithoutCharactersInput
+  main?: Prisma.CharacterCreateNestedOneWithoutAltsInput
+  alts?: Prisma.CharacterCreateNestedManyWithoutMainInput
+}
+
+export type CharacterUncheckedCreateWithoutUserInput = {
+  id?: number
+  name: string
+  faction: $Enums.Faction
+  class: $Enums.Class
+  spec: $Enums.Specialization
+  gearscore?: number
+  isMain?: boolean
+  guildId: number
+  mainId?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  alts?: Prisma.CharacterUncheckedCreateNestedManyWithoutMainInput
+}
+
+export type CharacterCreateOrConnectWithoutUserInput = {
+  where: Prisma.CharacterWhereUniqueInput
+  create: Prisma.XOR<Prisma.CharacterCreateWithoutUserInput, Prisma.CharacterUncheckedCreateWithoutUserInput>
+}
+
+export type CharacterCreateManyUserInputEnvelope = {
+  data: Prisma.CharacterCreateManyUserInput | Prisma.CharacterCreateManyUserInput[]
+  skipDuplicates?: boolean
+}
+
+export type CharacterUpsertWithWhereUniqueWithoutUserInput = {
+  where: Prisma.CharacterWhereUniqueInput
+  update: Prisma.XOR<Prisma.CharacterUpdateWithoutUserInput, Prisma.CharacterUncheckedUpdateWithoutUserInput>
+  create: Prisma.XOR<Prisma.CharacterCreateWithoutUserInput, Prisma.CharacterUncheckedCreateWithoutUserInput>
+}
+
+export type CharacterUpdateWithWhereUniqueWithoutUserInput = {
+  where: Prisma.CharacterWhereUniqueInput
+  data: Prisma.XOR<Prisma.CharacterUpdateWithoutUserInput, Prisma.CharacterUncheckedUpdateWithoutUserInput>
+}
+
+export type CharacterUpdateManyWithWhereWithoutUserInput = {
+  where: Prisma.CharacterScalarWhereInput
+  data: Prisma.XOR<Prisma.CharacterUpdateManyMutationInput, Prisma.CharacterUncheckedUpdateManyWithoutUserInput>
+}
+
 export type CharacterCreateManyGuildInput = {
   id?: number
   name: string
   faction: $Enums.Faction
+  class: $Enums.Class
+  spec: $Enums.Specialization
+  gearscore?: number
   isMain?: boolean
+  userId?: number | null
   mainId?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type CharacterUpdateWithoutGuildInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   faction?: Prisma.EnumFactionFieldUpdateOperationsInput | $Enums.Faction
+  class?: Prisma.EnumClassFieldUpdateOperationsInput | $Enums.Class
+  spec?: Prisma.EnumSpecializationFieldUpdateOperationsInput | $Enums.Specialization
+  gearscore?: Prisma.IntFieldUpdateOperationsInput | number
   isMain?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneWithoutCharactersNestedInput
   main?: Prisma.CharacterUpdateOneWithoutAltsNestedInput
   alts?: Prisma.CharacterUpdateManyWithoutMainNestedInput
 }
@@ -686,8 +1003,14 @@ export type CharacterUncheckedUpdateWithoutGuildInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   faction?: Prisma.EnumFactionFieldUpdateOperationsInput | $Enums.Faction
+  class?: Prisma.EnumClassFieldUpdateOperationsInput | $Enums.Class
+  spec?: Prisma.EnumSpecializationFieldUpdateOperationsInput | $Enums.Specialization
+  gearscore?: Prisma.IntFieldUpdateOperationsInput | number
   isMain?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  userId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   mainId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   alts?: Prisma.CharacterUncheckedUpdateManyWithoutMainNestedInput
 }
 
@@ -695,23 +1018,41 @@ export type CharacterUncheckedUpdateManyWithoutGuildInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   faction?: Prisma.EnumFactionFieldUpdateOperationsInput | $Enums.Faction
+  class?: Prisma.EnumClassFieldUpdateOperationsInput | $Enums.Class
+  spec?: Prisma.EnumSpecializationFieldUpdateOperationsInput | $Enums.Specialization
+  gearscore?: Prisma.IntFieldUpdateOperationsInput | number
   isMain?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  userId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   mainId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type CharacterCreateManyMainInput = {
   id?: number
   name: string
   faction: $Enums.Faction
+  class: $Enums.Class
+  spec: $Enums.Specialization
+  gearscore?: number
   isMain?: boolean
   guildId: number
+  userId?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type CharacterUpdateWithoutMainInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   faction?: Prisma.EnumFactionFieldUpdateOperationsInput | $Enums.Faction
+  class?: Prisma.EnumClassFieldUpdateOperationsInput | $Enums.Class
+  spec?: Prisma.EnumSpecializationFieldUpdateOperationsInput | $Enums.Specialization
+  gearscore?: Prisma.IntFieldUpdateOperationsInput | number
   isMain?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   guild?: Prisma.GuildUpdateOneRequiredWithoutCharactersNestedInput
+  user?: Prisma.UserUpdateOneWithoutCharactersNestedInput
   alts?: Prisma.CharacterUpdateManyWithoutMainNestedInput
 }
 
@@ -719,8 +1060,14 @@ export type CharacterUncheckedUpdateWithoutMainInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   faction?: Prisma.EnumFactionFieldUpdateOperationsInput | $Enums.Faction
+  class?: Prisma.EnumClassFieldUpdateOperationsInput | $Enums.Class
+  spec?: Prisma.EnumSpecializationFieldUpdateOperationsInput | $Enums.Specialization
+  gearscore?: Prisma.IntFieldUpdateOperationsInput | number
   isMain?: Prisma.BoolFieldUpdateOperationsInput | boolean
   guildId?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   alts?: Prisma.CharacterUncheckedUpdateManyWithoutMainNestedInput
 }
 
@@ -728,8 +1075,71 @@ export type CharacterUncheckedUpdateManyWithoutMainInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   faction?: Prisma.EnumFactionFieldUpdateOperationsInput | $Enums.Faction
+  class?: Prisma.EnumClassFieldUpdateOperationsInput | $Enums.Class
+  spec?: Prisma.EnumSpecializationFieldUpdateOperationsInput | $Enums.Specialization
+  gearscore?: Prisma.IntFieldUpdateOperationsInput | number
   isMain?: Prisma.BoolFieldUpdateOperationsInput | boolean
   guildId?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type CharacterCreateManyUserInput = {
+  id?: number
+  name: string
+  faction: $Enums.Faction
+  class: $Enums.Class
+  spec: $Enums.Specialization
+  gearscore?: number
+  isMain?: boolean
+  guildId: number
+  mainId?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type CharacterUpdateWithoutUserInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  faction?: Prisma.EnumFactionFieldUpdateOperationsInput | $Enums.Faction
+  class?: Prisma.EnumClassFieldUpdateOperationsInput | $Enums.Class
+  spec?: Prisma.EnumSpecializationFieldUpdateOperationsInput | $Enums.Specialization
+  gearscore?: Prisma.IntFieldUpdateOperationsInput | number
+  isMain?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  guild?: Prisma.GuildUpdateOneRequiredWithoutCharactersNestedInput
+  main?: Prisma.CharacterUpdateOneWithoutAltsNestedInput
+  alts?: Prisma.CharacterUpdateManyWithoutMainNestedInput
+}
+
+export type CharacterUncheckedUpdateWithoutUserInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  faction?: Prisma.EnumFactionFieldUpdateOperationsInput | $Enums.Faction
+  class?: Prisma.EnumClassFieldUpdateOperationsInput | $Enums.Class
+  spec?: Prisma.EnumSpecializationFieldUpdateOperationsInput | $Enums.Specialization
+  gearscore?: Prisma.IntFieldUpdateOperationsInput | number
+  isMain?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  guildId?: Prisma.IntFieldUpdateOperationsInput | number
+  mainId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  alts?: Prisma.CharacterUncheckedUpdateManyWithoutMainNestedInput
+}
+
+export type CharacterUncheckedUpdateManyWithoutUserInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  faction?: Prisma.EnumFactionFieldUpdateOperationsInput | $Enums.Faction
+  class?: Prisma.EnumClassFieldUpdateOperationsInput | $Enums.Class
+  spec?: Prisma.EnumSpecializationFieldUpdateOperationsInput | $Enums.Specialization
+  gearscore?: Prisma.IntFieldUpdateOperationsInput | number
+  isMain?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  guildId?: Prisma.IntFieldUpdateOperationsInput | number
+  mainId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -767,10 +1177,17 @@ export type CharacterSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   id?: boolean
   name?: boolean
   faction?: boolean
+  class?: boolean
+  spec?: boolean
+  gearscore?: boolean
   isMain?: boolean
   guildId?: boolean
+  userId?: boolean
   mainId?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   guild?: boolean | Prisma.GuildDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.Character$userArgs<ExtArgs>
   main?: boolean | Prisma.Character$mainArgs<ExtArgs>
   alts?: boolean | Prisma.Character$altsArgs<ExtArgs>
   _count?: boolean | Prisma.CharacterCountOutputTypeDefaultArgs<ExtArgs>
@@ -780,10 +1197,17 @@ export type CharacterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   id?: boolean
   name?: boolean
   faction?: boolean
+  class?: boolean
+  spec?: boolean
+  gearscore?: boolean
   isMain?: boolean
   guildId?: boolean
+  userId?: boolean
   mainId?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   guild?: boolean | Prisma.GuildDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.Character$userArgs<ExtArgs>
   main?: boolean | Prisma.Character$mainArgs<ExtArgs>
 }, ExtArgs["result"]["character"]>
 
@@ -791,10 +1215,17 @@ export type CharacterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   id?: boolean
   name?: boolean
   faction?: boolean
+  class?: boolean
+  spec?: boolean
+  gearscore?: boolean
   isMain?: boolean
   guildId?: boolean
+  userId?: boolean
   mainId?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   guild?: boolean | Prisma.GuildDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.Character$userArgs<ExtArgs>
   main?: boolean | Prisma.Character$mainArgs<ExtArgs>
 }, ExtArgs["result"]["character"]>
 
@@ -802,24 +1233,33 @@ export type CharacterSelectScalar = {
   id?: boolean
   name?: boolean
   faction?: boolean
+  class?: boolean
+  spec?: boolean
+  gearscore?: boolean
   isMain?: boolean
   guildId?: boolean
+  userId?: boolean
   mainId?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type CharacterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "faction" | "isMain" | "guildId" | "mainId", ExtArgs["result"]["character"]>
+export type CharacterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "faction" | "class" | "spec" | "gearscore" | "isMain" | "guildId" | "userId" | "mainId" | "createdAt" | "updatedAt", ExtArgs["result"]["character"]>
 export type CharacterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   guild?: boolean | Prisma.GuildDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.Character$userArgs<ExtArgs>
   main?: boolean | Prisma.Character$mainArgs<ExtArgs>
   alts?: boolean | Prisma.Character$altsArgs<ExtArgs>
   _count?: boolean | Prisma.CharacterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CharacterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   guild?: boolean | Prisma.GuildDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.Character$userArgs<ExtArgs>
   main?: boolean | Prisma.Character$mainArgs<ExtArgs>
 }
 export type CharacterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   guild?: boolean | Prisma.GuildDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.Character$userArgs<ExtArgs>
   main?: boolean | Prisma.Character$mainArgs<ExtArgs>
 }
 
@@ -827,6 +1267,7 @@ export type $CharacterPayload<ExtArgs extends runtime.Types.Extensions.InternalA
   name: "Character"
   objects: {
     guild: Prisma.$GuildPayload<ExtArgs>
+    user: Prisma.$UserPayload<ExtArgs> | null
     main: Prisma.$CharacterPayload<ExtArgs> | null
     alts: Prisma.$CharacterPayload<ExtArgs>[]
   }
@@ -834,9 +1275,15 @@ export type $CharacterPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     id: number
     name: string
     faction: $Enums.Faction
+    class: $Enums.Class
+    spec: $Enums.Specialization
+    gearscore: number
     isMain: boolean
     guildId: number
+    userId: number | null
     mainId: number | null
+    createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["character"]>
   composites: {}
 }
@@ -1232,6 +1679,7 @@ readonly fields: CharacterFieldRefs;
 export interface Prisma__CharacterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   guild<T extends Prisma.GuildDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GuildDefaultArgs<ExtArgs>>): Prisma.Prisma__GuildClient<runtime.Types.Result.GetResult<Prisma.$GuildPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  user<T extends Prisma.Character$userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Character$userArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   main<T extends Prisma.Character$mainArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Character$mainArgs<ExtArgs>>): Prisma.Prisma__CharacterClient<runtime.Types.Result.GetResult<Prisma.$CharacterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   alts<T extends Prisma.Character$altsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Character$altsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CharacterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -1266,9 +1714,15 @@ export interface CharacterFieldRefs {
   readonly id: Prisma.FieldRef<"Character", 'Int'>
   readonly name: Prisma.FieldRef<"Character", 'String'>
   readonly faction: Prisma.FieldRef<"Character", 'Faction'>
+  readonly class: Prisma.FieldRef<"Character", 'Class'>
+  readonly spec: Prisma.FieldRef<"Character", 'Specialization'>
+  readonly gearscore: Prisma.FieldRef<"Character", 'Int'>
   readonly isMain: Prisma.FieldRef<"Character", 'Boolean'>
   readonly guildId: Prisma.FieldRef<"Character", 'Int'>
+  readonly userId: Prisma.FieldRef<"Character", 'Int'>
   readonly mainId: Prisma.FieldRef<"Character", 'Int'>
+  readonly createdAt: Prisma.FieldRef<"Character", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"Character", 'DateTime'>
 }
     
 
@@ -1662,6 +2116,25 @@ export type CharacterDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Int
    * Limit how many Characters to delete.
    */
   limit?: number
+}
+
+/**
+ * Character.user
+ */
+export type Character$userArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**
