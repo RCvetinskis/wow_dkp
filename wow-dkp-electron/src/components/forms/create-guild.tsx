@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Faction } from "@/types/general";
-import { api } from "@/lib/api-handler";
+import { authenticatedApi } from "@/lib/api-handler";
 import { useToast } from "@/context/toast-context";
 import { useNavigate } from "react-router-dom";
 
@@ -16,7 +16,7 @@ const CreateGuild = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      await api.post("/guild", {
+      await authenticatedApi.post("/guild", {
         name,
         faction,
       });

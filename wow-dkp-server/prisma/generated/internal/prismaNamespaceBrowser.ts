@@ -75,7 +75,9 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 export const GuildScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  description: 'description',
   faction: 'faction',
+  guildMasterId: 'guildMasterId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -92,6 +94,7 @@ export const CharacterScalarFieldEnum = {
   gearscore: 'gearscore',
   isMain: 'isMain',
   guildId: 'guildId',
+  guildRank: 'guildRank',
   userId: 'userId',
   mainId: 'mainId',
   createdAt: 'createdAt',

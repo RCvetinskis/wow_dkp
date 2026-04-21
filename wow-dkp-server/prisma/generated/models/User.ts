@@ -224,6 +224,7 @@ export type UserWhereInput = {
   role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  guilds?: Prisma.GuildListRelationFilter
   characters?: Prisma.CharacterListRelationFilter
 }
 
@@ -234,6 +235,7 @@ export type UserOrderByWithRelationInput = {
   role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  guilds?: Prisma.GuildOrderByRelationAggregateInput
   characters?: Prisma.CharacterOrderByRelationAggregateInput
 }
 
@@ -247,6 +249,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  guilds?: Prisma.GuildListRelationFilter
   characters?: Prisma.CharacterListRelationFilter
 }, "id" | "name">
 
@@ -282,6 +285,7 @@ export type UserCreateInput = {
   role?: $Enums.Role
   createdAt?: Date | string
   updatedAt?: Date | string
+  guilds?: Prisma.GuildCreateNestedManyWithoutGuildMasterInput
   characters?: Prisma.CharacterCreateNestedManyWithoutUserInput
 }
 
@@ -292,6 +296,7 @@ export type UserUncheckedCreateInput = {
   role?: $Enums.Role
   createdAt?: Date | string
   updatedAt?: Date | string
+  guilds?: Prisma.GuildUncheckedCreateNestedManyWithoutGuildMasterInput
   characters?: Prisma.CharacterUncheckedCreateNestedManyWithoutUserInput
 }
 
@@ -301,6 +306,7 @@ export type UserUpdateInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  guilds?: Prisma.GuildUpdateManyWithoutGuildMasterNestedInput
   characters?: Prisma.CharacterUpdateManyWithoutUserNestedInput
 }
 
@@ -311,6 +317,7 @@ export type UserUncheckedUpdateInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  guilds?: Prisma.GuildUncheckedUpdateManyWithoutGuildMasterNestedInput
   characters?: Prisma.CharacterUncheckedUpdateManyWithoutUserNestedInput
 }
 
@@ -338,6 +345,11 @@ export type UserUncheckedUpdateManyInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type UserScalarRelationFilter = {
+  is?: Prisma.UserWhereInput
+  isNot?: Prisma.UserWhereInput
 }
 
 export type UserNullableScalarRelationFilter = {
@@ -380,6 +392,20 @@ export type UserSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
 }
 
+export type UserCreateNestedOneWithoutGuildsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutGuildsInput, Prisma.UserUncheckedCreateWithoutGuildsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutGuildsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutGuildsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutGuildsInput, Prisma.UserUncheckedCreateWithoutGuildsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutGuildsInput
+  upsert?: Prisma.UserUpsertWithoutGuildsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutGuildsInput, Prisma.UserUpdateWithoutGuildsInput>, Prisma.UserUncheckedUpdateWithoutGuildsInput>
+}
+
 export type UserCreateNestedOneWithoutCharactersInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutCharactersInput, Prisma.UserUncheckedCreateWithoutCharactersInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutCharactersInput
@@ -400,12 +426,67 @@ export type EnumRoleFieldUpdateOperationsInput = {
   set?: $Enums.Role
 }
 
+export type UserCreateWithoutGuildsInput = {
+  name: string
+  password: string
+  role?: $Enums.Role
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  characters?: Prisma.CharacterCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutGuildsInput = {
+  id?: number
+  name: string
+  password: string
+  role?: $Enums.Role
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  characters?: Prisma.CharacterUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutGuildsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutGuildsInput, Prisma.UserUncheckedCreateWithoutGuildsInput>
+}
+
+export type UserUpsertWithoutGuildsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutGuildsInput, Prisma.UserUncheckedUpdateWithoutGuildsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutGuildsInput, Prisma.UserUncheckedCreateWithoutGuildsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutGuildsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutGuildsInput, Prisma.UserUncheckedUpdateWithoutGuildsInput>
+}
+
+export type UserUpdateWithoutGuildsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  characters?: Prisma.CharacterUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutGuildsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  characters?: Prisma.CharacterUncheckedUpdateManyWithoutUserNestedInput
+}
+
 export type UserCreateWithoutCharactersInput = {
   name: string
   password: string
   role?: $Enums.Role
   createdAt?: Date | string
   updatedAt?: Date | string
+  guilds?: Prisma.GuildCreateNestedManyWithoutGuildMasterInput
 }
 
 export type UserUncheckedCreateWithoutCharactersInput = {
@@ -415,6 +496,7 @@ export type UserUncheckedCreateWithoutCharactersInput = {
   role?: $Enums.Role
   createdAt?: Date | string
   updatedAt?: Date | string
+  guilds?: Prisma.GuildUncheckedCreateNestedManyWithoutGuildMasterInput
 }
 
 export type UserCreateOrConnectWithoutCharactersInput = {
@@ -439,6 +521,7 @@ export type UserUpdateWithoutCharactersInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  guilds?: Prisma.GuildUpdateManyWithoutGuildMasterNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCharactersInput = {
@@ -448,6 +531,7 @@ export type UserUncheckedUpdateWithoutCharactersInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  guilds?: Prisma.GuildUncheckedUpdateManyWithoutGuildMasterNestedInput
 }
 
 
@@ -456,10 +540,12 @@ export type UserUncheckedUpdateWithoutCharactersInput = {
  */
 
 export type UserCountOutputType = {
+  guilds: number
   characters: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  guilds?: boolean | UserCountOutputTypeCountGuildsArgs
   characters?: boolean | UserCountOutputTypeCountCharactersArgs
 }
 
@@ -471,6 +557,13 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
    * Select specific fields to fetch from the UserCountOutputType
    */
   select?: Prisma.UserCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountGuildsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.GuildWhereInput
 }
 
 /**
@@ -488,6 +581,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   role?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  guilds?: boolean | Prisma.User$guildsArgs<ExtArgs>
   characters?: boolean | Prisma.User$charactersArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
@@ -521,6 +615,7 @@ export type UserSelectScalar = {
 
 export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "password" | "role" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  guilds?: boolean | Prisma.User$guildsArgs<ExtArgs>
   characters?: boolean | Prisma.User$charactersArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -530,6 +625,7 @@ export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
+    guilds: Prisma.$GuildPayload<ExtArgs>[]
     characters: Prisma.$CharacterPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -933,6 +1029,7 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  guilds<T extends Prisma.User$guildsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$guildsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GuildPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   characters<T extends Prisma.User$charactersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$charactersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CharacterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1354,6 +1451,30 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Limit how many Users to delete.
    */
   limit?: number
+}
+
+/**
+ * User.guilds
+ */
+export type User$guildsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Guild
+   */
+  select?: Prisma.GuildSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Guild
+   */
+  omit?: Prisma.GuildOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GuildInclude<ExtArgs> | null
+  where?: Prisma.GuildWhereInput
+  orderBy?: Prisma.GuildOrderByWithRelationInput | Prisma.GuildOrderByWithRelationInput[]
+  cursor?: Prisma.GuildWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.GuildScalarFieldEnum | Prisma.GuildScalarFieldEnum[]
 }
 
 /**

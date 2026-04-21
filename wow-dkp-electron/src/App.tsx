@@ -5,20 +5,33 @@ import GuildsPage from "./pages/GuildsPage";
 import NewGuildPage from "./pages/NewGuildPage";
 import { ToastProvider } from "./context/toast-context";
 import AuthPage from "./pages/AuthPage";
+import { AuthProvider, useAuth } from "./context/auth-context";
+import MyGuildsPage from "./pages/MyGuildsPage";
+import GuildPage from "./pages/GuildPage";
+
 function App() {
+  const { user } = useAuth();
+  console.log(user);
   return (
-    <ToastProvider>
-      <Navbar />
-      <div className="container mx-auto px-4 py-6">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/guilds" element={<GuildsPage />} />
-          <Route path="/guilds/new" element={<NewGuildPage />} />
-          {/* auth */}
-          <Route path="/auth" element={<AuthPage />} />
-        </Routes>
-      </div>
-    </ToastProvider>
+    <AuthProvider>
+      <ToastProvider>
+        <Navbar />
+        <div className="container mx-auto px-4 py-6">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/guilds" element={<GuildsPage />} />
+
+            {/* auth */}
+            {!user && <Route path="/auth" element={<AuthPage />} />}
+
+            {/* authenticated */}
+            <Route path="/guilds/new" element={<NewGuildPage />} />
+            <Route path="/guilds/me" element={<MyGuildsPage />} />
+            <Route path="/guilds/:id" element={<GuildPage />} />
+          </Routes>
+        </div>
+      </ToastProvider>
+    </AuthProvider>
   );
 }
 

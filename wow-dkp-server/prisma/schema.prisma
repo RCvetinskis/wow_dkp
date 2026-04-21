@@ -86,11 +86,23 @@ enum Specialization {
   RESTORATION_DRUID
 }
 
+enum GuildRank {
+ GUILD_MASTER
+ GUILD_OFFICER
+ RECRUITER
+ CORE_RAIDER
+ RAIDER
+}
 model Guild {
   id    Int     @id @default(autoincrement())
   name  String @unique
+  description String?
+
   faction Faction
   characters Character[]
+
+  guildMasterId Int
+  guildMaster   User @relation(fields: [guildMasterId], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -109,6 +121,7 @@ model Character {
   guildId  Int
   guild    Guild    @relation(fields: [guildId], references: [id])
 
+  guildRank GuildRank @default(RAIDER)
   userId Int?
   user   User? @relation(fields: [userId], references: [id])
 
@@ -128,7 +141,9 @@ model User{
 
   role      Role     @default(USER)
 
+  guilds   Guild[]
   characters Character[]
+  
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

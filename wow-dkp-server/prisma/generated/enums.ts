@@ -83,3 +83,14 @@ export const Specialization = {
 } as const
 
 export type Specialization = (typeof Specialization)[keyof typeof Specialization]
+
+
+export const GuildRank = {
+  GUILD_MASTER: 'GUILD_MASTER',
+  GUILD_OFFICER: 'GUILD_OFFICER',
+  RECRUITER: 'RECRUITER',
+  CORE_RAIDER: 'CORE_RAIDER',
+  RAIDER: 'RAIDER'
+} as const
+
+export type GuildRank = (typeof GuildRank)[keyof typeof GuildRank]

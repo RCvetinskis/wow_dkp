@@ -1,28 +1,10 @@
-import { useEffect, useState } from "react";
 import GuildCard, { GuildCardSkeleton } from "../cards/guild-card";
-import { api } from "@/lib/api-handler";
 import { Guild } from "@/types/general";
-
-const GuildList = () => {
-  const [guilds, setGuilds] = useState<Guild[]>([]);
-
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    const fetchGuilds = async () => {
-      try {
-        setLoading(true);
-        const { data } = await api.get("/guild");
-        console.log(data);
-        setGuilds(data);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchGuilds();
-  }, []);
-
+type Props = {
+  guilds: Guild[];
+  loading: boolean;
+};
+const GuildList = ({ guilds, loading }: Props) => {
   if (loading)
     return (
       <div className="flex gap-5 items-center flex-wrap justify-center md:justify-start ">

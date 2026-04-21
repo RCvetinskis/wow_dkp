@@ -1,7 +1,11 @@
 import { useNavigate } from "react-router-dom";
+import UserMenu from "./user-menu";
+import { useAuth } from "@/context/auth-context";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
+
   return (
     <div className="navbar bg-base-100 shadow-sm">
       <div className="flex-1">
@@ -23,21 +27,41 @@ const Navbar = () => {
                     Guilds
                   </button>
                 </li>
-                <li>
-                  <button
-                    className="btn w-full"
-                    onClick={() => navigate("/guilds/new")}
-                  >
-                    New
-                  </button>
-                </li>
+                {user && (
+                  <>
+                    <li>
+                      <button
+                        className="btn w-full"
+                        onClick={() => navigate("/guilds/me")}
+                      >
+                        My Guilds
+                      </button>
+                    </li>
+                    <li>
+                      <button
+                        className="btn w-full"
+                        onClick={() => navigate("/guilds/new")}
+                      >
+                        New
+                      </button>
+                    </li>
+                  </>
+                )}
               </ul>
             </details>
           </li>
+
           <li>
-            <button className="btn btn-ghost" onClick={() => navigate("/auth")}>
-              Register/Login
-            </button>
+            {user ? (
+              <UserMenu />
+            ) : (
+              <button
+                className="btn btn-ghost"
+                onClick={() => navigate("/auth")}
+              >
+                Register/Login
+              </button>
+            )}
           </li>
         </ul>
       </div>

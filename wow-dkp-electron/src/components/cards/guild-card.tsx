@@ -1,11 +1,19 @@
+import { useAuth } from "@/context/auth-context";
 import { cn } from "@/lib/utils";
 import { Guild } from "@/types/general";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   guild: Guild;
 };
-
+// TODO: ADD CHARACTERS TO GUILD
+// ADD DKP SYSTEM
+// DISPLAY GUILD PAGE PROPERLY, CHARACTERS, LEADERBOARD, TOTAL DKP
 const GuildCard = ({ guild }: Props) => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const isGM = user?.id === guild.guildMasterId;
+
   return (
     <div className="card bg-base-100 w-96 shadow-lg">
       <div className="card-body">
@@ -18,13 +26,22 @@ const GuildCard = ({ guild }: Props) => {
         >
           {guild.faction}
         </h3>
-        <p>
-          A card component has a figure, a body part, and inside body there are
-          title and actions parts
-        </p>
-        <div className="card-actions justify-end">
-          <button className="btn btn-primary">Buy Now</button>
-        </div>
+        {guild.description && (
+          <p>
+            A card component has a figure, a body part, and inside body there
+            are title and actions parts
+          </p>
+        )}
+        {isGM && (
+          <div className="card-actions justify-end">
+            <button
+              className="btn btn-primary"
+              onClick={() => navigate(`/guilds/${guild.id}`)}
+            >
+              Edit
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -2,30 +2,33 @@ import { useState } from "react";
 import { api } from "@/lib/api-handler";
 import { useToast } from "@/context/toast-context";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/context/auth-context";
 
 const LoginUser = () => {
-  // TODO: frontend axios token storage
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { showToast } = useToast();
+  const { setUser } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const data = await api.post("/auth/login", {
+      const { data } = await api.post("/auth/login", {
         name,
         password,
       });
-      console.log(data);
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+      setUser(data.user);
       showToast({
         message: "Login Sucessfully",
         type: "success",
       });
 
-      navigate("/guilds");
+      navigate("/");
     } catch (err: any) {
       showToast({
         message: err.message,

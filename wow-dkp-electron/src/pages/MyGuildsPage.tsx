@@ -1,9 +1,9 @@
 import GuildList from "@/components/lists/guild-list";
-import { api } from "@/lib/api-handler";
+import { authenticatedApi } from "@/lib/api-handler";
 import { Guild } from "@/types/general";
 import { useEffect, useState } from "react";
 
-const GuildsPage = () => {
+const MyGuildsPage = () => {
   const [guilds, setGuilds] = useState<Guild[]>([]);
 
   const [loading, setLoading] = useState(true);
@@ -11,7 +11,7 @@ const GuildsPage = () => {
     const fetchGuilds = async () => {
       try {
         setLoading(true);
-        const { data } = await api.get("/guild");
+        const { data } = await authenticatedApi.get("/guild/me");
 
         setGuilds(data);
       } catch {
@@ -29,4 +29,4 @@ const GuildsPage = () => {
   );
 };
 
-export default GuildsPage;
+export default MyGuildsPage;
