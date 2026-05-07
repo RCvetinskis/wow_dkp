@@ -1,7 +1,7 @@
 import { useAuth } from "@/context/auth-context";
 import { cn } from "@/lib/utils";
 import { Guild } from "@/types/general";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 type Props = {
   guild: Guild;
@@ -14,8 +14,16 @@ const GuildCard = ({ guild }: Props) => {
   const navigate = useNavigate();
   const isGM = user?.id === guild.guildMasterId;
 
+  const handleNavigateEdit = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigate(`/guilds/${guild.id}/edit`);
+  };
   return (
-    <div className="card bg-base-100 w-96 shadow-lg">
+    <Link
+      to={`/guilds/${guild.id}`}
+      className="card bg-base-100 w-96 shadow-lg"
+    >
       <div className="card-body">
         <h2 className="card-title">{guild.name}</h2>
         <h3
@@ -26,24 +34,16 @@ const GuildCard = ({ guild }: Props) => {
         >
           {guild.faction}
         </h3>
-        {guild.description && (
-          <p>
-            A card component has a figure, a body part, and inside body there
-            are title and actions parts
-          </p>
-        )}
+        {guild.description && <p>{guild.description}</p>}
         {isGM && (
           <div className="card-actions justify-end">
-            <button
-              className="btn btn-primary"
-              onClick={() => navigate(`/guilds/${guild.id}`)}
-            >
+            <button className="btn btn-primary" onClick={handleNavigateEdit}>
               Edit
             </button>
           </div>
         )}
       </div>
-    </div>
+    </Link>
   );
 };
 

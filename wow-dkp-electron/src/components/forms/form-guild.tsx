@@ -1,13 +1,19 @@
 import { useState } from "react";
-import { Faction } from "@/types/general";
+import { Faction, Guild } from "@/types/general";
 import { authenticatedApi } from "@/lib/api-handler";
 import { useToast } from "@/context/toast-context";
 import { useNavigate } from "react-router-dom";
-import SelectFactions from "../cards/select-factions";
+import SelectChars from "../cards/select-chars";
 
-const CreateGuild = () => {
-  const [name, setName] = useState("");
-  const [faction, setFaction] = useState<Faction>("ALLIANCE");
+const factions: Faction[] = ["ALLIANCE", "HORDE"];
+type Props = {
+  guild: Guild | null;
+};
+const FormGuild = ({ guild }: Props) => {
+  const initialName = guild?.name || "";
+  const initialFaction = guild?.faction || "ALLIANCE";
+  const [name, setName] = useState(initialName);
+  const [faction, setFaction] = useState<Faction>(initialFaction);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { showToast } = useToast();
@@ -39,7 +45,7 @@ const CreateGuild = () => {
   return (
     <div className="max-w-200 w-full mx-auto shadow-2xl p-4">
       <form className="space-y-6" onSubmit={handleSubmit}>
-        <div className="space-x-6">
+        <div className="space-x-6 space-y-6">
           <input
             type="text"
             placeholder="Guild Title"
@@ -47,12 +53,25 @@ const CreateGuild = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
-          <SelectFactions faction={faction} setFaction={setFaction} />
+
+          <select
+            className="select"
+            value={faction}
+            onChange={(e) => setFaction(e.target.value as Faction)}
+          >
+            {factions.map((f) => (
+              <option key={f} value={f}>
+                {f}
+              </option>
+            ))}
+          </select>
+
+          <SelectChars initialFaction={initialFaction} initialGuild={guild} />
         </div>
 
         <div className="flex justify-end">
           <button disabled={loading} className="btn btn-primary" type="submit">
-            Create
+            Save
           </button>
         </div>
       </form>
@@ -60,4 +79,4 @@ const CreateGuild = () => {
   );
 };
 
-export default CreateGuild;
+export default FormGuild;

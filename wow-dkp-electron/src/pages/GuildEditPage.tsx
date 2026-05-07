@@ -1,21 +1,24 @@
-import GuildCard from "@/components/cards/guild-card";
+import FormGuild from "@/components/forms/form-guild";
 import { fetchGuildById } from "@/helpers/guild-helper";
 import { Guild } from "@/types/general";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-const GuildPage = () => {
+type Props = {};
+
+const GuildEditPage = (props: Props) => {
   const { id } = useParams();
 
   const [guild, setGuild] = useState<Guild | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchGuilds = async () => {
+    const fetchGuild = async () => {
       try {
         setLoading(true);
-        const data = await fetchGuildById(id);
 
+        const data = await fetchGuildById(id);
+        console.log(data);
         setGuild(data);
       } catch {
         setGuild(null);
@@ -23,15 +26,15 @@ const GuildPage = () => {
         setLoading(false);
       }
     };
-    fetchGuilds();
+    fetchGuild();
   }, []);
 
   if (!guild) return <div>Not found</div>;
   return (
     <div>
-      <GuildCard guild={guild} />
+      <FormGuild guild={guild} />
     </div>
   );
 };
 
-export default GuildPage;
+export default GuildEditPage;

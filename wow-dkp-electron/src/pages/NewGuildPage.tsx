@@ -1,11 +1,11 @@
-import CreateGuild from "@/components/forms/create-guild";
+import FormGuild from "@/components/forms/form-guild";
 
 type Props = {};
 
 const NewGuildPage = (props: Props) => {
   return (
     <div>
-      <CreateGuild />
+      <FormGuild guild={null} />
     </div>
   );
 };

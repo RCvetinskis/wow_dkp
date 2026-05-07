@@ -8,6 +8,7 @@ import AuthPage from "./pages/AuthPage";
 import { AuthProvider, useAuth } from "./context/auth-context";
 import MyGuildsPage from "./pages/MyGuildsPage";
 import GuildPage from "./pages/GuildPage";
+import GuildEditPage from "./pages/GuildEditPage";
 
 function App() {
   const { user } = useAuth();
@@ -28,6 +29,7 @@ function App() {
             <Route path="/guilds/new" element={<NewGuildPage />} />
             <Route path="/guilds/me" element={<MyGuildsPage />} />
             <Route path="/guilds/:id" element={<GuildPage />} />
+            <Route path="/guilds/:id/edit" element={<GuildEditPage />} />
           </Routes>
         </div>
       </ToastProvider>
