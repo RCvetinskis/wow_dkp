@@ -1,14 +1,13 @@
 import Dialog from "../dialog";
 import FormChar from "../forms/form-char";
-import { Faction, Guild } from "@/types/general";
+import { Guild } from "@/types/general";
 
 type Props = {
-  initialFaction?: Faction;
-  initialGuild?: Guild | null;
+  initialGuild: Guild;
 };
 
 const chars: any[] = [];
-const SelectChars = ({ initialFaction, initialGuild }: Props) => {
+const SelectChars = ({ initialGuild }: Props) => {
   if (chars.length === 0) {
     return (
       <div className="flex items-center gap-3">
@@ -19,10 +18,7 @@ const SelectChars = ({ initialFaction, initialGuild }: Props) => {
           buttonTitle="Create Character"
           buttonClassName="btn-primary btn-xs"
         >
-          <FormChar
-            initialGuild={initialGuild?.name}
-            initialFaction={initialFaction}
-          />
+          <FormChar initialGuild={initialGuild.name} />
         </Dialog>
       </div>
     );

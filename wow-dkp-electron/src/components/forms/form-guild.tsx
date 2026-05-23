@@ -7,7 +7,7 @@ import SelectChars from "../cards/select-chars";
 
 const factions: Faction[] = ["ALLIANCE", "HORDE"];
 type Props = {
-  guild: Guild | null;
+  guild: Guild;
 };
 const FormGuild = ({ guild }: Props) => {
   const initialName = guild?.name || "";
@@ -66,7 +66,7 @@ const FormGuild = ({ guild }: Props) => {
             ))}
           </select>
 
-          <SelectChars initialFaction={initialFaction} initialGuild={guild} />
+          <SelectChars initialGuild={guild} />
         </div>
 
         <div className="flex justify-end">

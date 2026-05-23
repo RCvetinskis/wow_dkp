@@ -1,18 +1,16 @@
-import { useState } from "react";
-import SelectFactions from "../cards/select-factions";
-import { Faction } from "@/types/general";
+import { api } from "@/lib/api-handler";
+import { useEffect, useState } from "react";
+import SelectClass from "../selectors/select-class";
 
 type Props = {
-  initialFaction?: Faction;
-  initialGuild?: string | null;
+  initialGuild: string;
 };
 
-const FormChar = ({ initialFaction, initialGuild }: Props) => {
+const FormChar = ({ initialGuild }: Props) => {
   const [name, setName] = useState("");
   const [wowClass, setWowClass] = useState("");
   const [wowSpec, setWowSpec] = useState("");
-  const [faction, setFaction] = useState<Faction>(initialFaction || "ALLIANCE");
-  const [guild, setGuild] = useState(initialGuild || "");
+  const [gearScore, setGearScore] = useState("");
 
   const handleSubmit = async () => {
     //: TODO CREATE CHARACTER CRUD
@@ -20,8 +18,6 @@ const FormChar = ({ initialFaction, initialGuild }: Props) => {
     // 2. make classes validation for example warlock cannot have holy spec
     // 3. create char
     console.log(name);
-    console.log(faction);
-    console.log(guild);
   };
   return (
     <div className="pt-2 space-y-2">
@@ -37,16 +33,12 @@ const FormChar = ({ initialFaction, initialGuild }: Props) => {
           type="text"
           placeholder="Guild"
           className="input"
-          value={guild}
-          onChange={(e) => setGuild(e.target.value)}
+          value={initialGuild}
+          readOnly
         />
       </div>
 
-      <SelectFactions
-        faction={faction}
-        setFaction={setFaction}
-        className=" w-full"
-      />
+      <SelectClass />
 
       <div className="flex justify-end modal-action">
         <button
